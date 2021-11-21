@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "423608067556",
+    "project_id": "asra-pro",
+    "storage_bucket": "asra-pro.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:423608067556:android:064ba7c9154776a58513f1",
+        "android_client_info": {
+          "package_name": "com.areef.asrapro"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "423608067556-1ln11v35p325i4sbl5j1so2lsrfn9mfv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB9w67iXZuqFmZ6nOPVXSz-K1TO5zJPrmA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "423608067556-1ln11v35p325i4sbl5j1so2lsrfn9mfv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

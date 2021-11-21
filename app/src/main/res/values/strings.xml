@@ -1,0 +1,126 @@
+<resources>
+    <string name="app_name">Asra Pro</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_main">Asra Pro</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_tools">Tools</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_send">Send</string>
+
+
+    //// Product Details Page //////
+    <string name="product_title">Product Title</string>
+    <string name="total_ratings">total ratings</string>
+    <string name="available">Available</string>
+    <string name="redeem">Redeem</string>
+    <string name="add_to_cart">ADD TO CART</string>
+    <string name="buy_now">BUY NOW</string>
+    <string name="description">Description</string>
+    <string name="specification">Specification</string>
+    <string name="other_details">Other Details</string>
+    <string name="product_details">Product Details</string>
+    <string name="ratings">Ratings</string>
+    <string name="your_ratings">Your ratings</string>
+    <string name="check_price_after_coupen_redemption">Check price after coupen redemption</string>
+    //// Product Details Page //////
+
+
+    //// Order Details Page //////
+
+    <string name="product_title_odp">Redmi 5</string>
+    <string name="product_price">Rs.</string>
+    <string name="product_quantity">Qty: 1</string>
+    <string name="ordered_title">Ordered</string>
+    <string name="ordered_date">Mon, 12th Jan 2021 -7:00 A.M</string>
+    <string name="ordered_body">Your order has been placed.</string>
+    <string name="packed_title">Packed</string>
+    <string name="packed_date">Mon, 12th Jan 2021 -7:00 A.M</string>
+    <string name="packed_body">Your order has been packed.</string>
+    <string name="shipping_title">Shipped</string>
+    <string name="shipping_date">Mon, 12th Jan 2021 -7:00 A.M</string>
+    <string name="shipping_body">Your order has been shipped.</string>
+    <string name="delivered_title">Delivered</string>
+    <string name="delivered_date">Mon, 12th Jan 2021 -7:00 A.M</string>
+    <string name="delivered_body">Your order has been delivered.</string>
+    <string name="rating_title">Your ratings</string>
+    <string name="price_details_title">PRICE DETAILS</string>
+    <string name="total_items">Price (2 items)</string>
+    <string name="delivery_title">Delivery</string>
+    <string name="total_price_tv">Total Amount</string>
+    <string name="total_price">Rs.</string>
+    <string name="delivery_price">Free</string>
+    <string name="total_items_price">>Rs.</string>
+    <string name="saved_amount">>You saved Rs.3500/- on this order</string>
+
+
+    //// Order Details Page //////
+
+
+    //// Delivery Page //////
+    <string name="shipping_details">SHIPPING DETAILS</string>
+    <string name="fullname">Name</string>
+    <string name="shipping_address">Shipping Address</string>
+    <string name="pincode">Pincode</string>
+    <string name="change_or_add_a_new_address">Change or add a new address</string>
+    <string name="total_amount_value">Rs.</string>
+    <string name="total_amount">Total Amount</string>
+    <string name="continue_btn">continue</string>
+    <string name="thank_you">Thank You</string>
+    <string name="order_confirmed_msg">Your order has been confirmed.</string>
+    <string name="order_id">: 25sdg3gr56fdtrh</string>
+    <string name="order_confirmation_message_and_email">You will shortly receive your order confirmation message and email.</string>
+    <string name="continue_shopping">Continue shopping</string>
+    <string name="expected_delivery_within_4_6_days">Expected delivery within 4-6 days.</string>
+    //// Delivery Page //////
+
+
+    <string-array name="india_states">
+        <item>Andaman and Nicobar Islands</item>
+        <item>Andhra Pradesh</item>
+        <item>Arunachal Pradesh</item>
+        <item>Assam</item>
+        <item>Bihar</item>
+        <item>Chandigarh</item>
+        <item>Chhattisgarh</item>
+        <item>Dadra and Nagar Haveli</item>
+        <item>Daman and Diu</item>
+        <item>Delhi</item>
+        <item>Goa</item>
+        <item>Gujarat</item>
+        <item>Haryana</item>
+        <item>Himachal Pradesh</item>
+        <item>Jammu and Kashmir</item>
+        <item>Jharkhand</item>
+        <item>Karnataka</item>
+        <item>Kerala</item>
+        <item>Lakshadweep</item>
+        <item>Madhya Pradesh</item>
+        <item>Maharashtra</item>
+        <item>Manipur</item>
+        <item>Meghalaya</item>
+        <item>Mizoram</item>
+        <item>Nagaland</item>
+        <item>Orissa</item>
+        <item>Pondicherry</item>
+        <item>Punjab</item>
+        <item>Rajasthan</item>
+        <item>Sikkim</item>
+        <item>Tamil Nadu</item>
+        <item>Telangana</item>
+        <item>Tripura</item>
+        <item>Uttaranchal</item>
+        <item>Uttar Pradesh</item>
+        <item>West Bengal</item>
+    </string-array>
+</resources>

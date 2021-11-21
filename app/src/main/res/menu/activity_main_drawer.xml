@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">-->
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:title="Menu"
+            android:icon="@drawable/nav_menu_dashboard_icon"/>
+        <item
+            android:id="@+id/nav_search"
+            android:title="Search"
+            android:icon="@drawable/nav_menu_search_icon"/>
+        <item
+            android:id="@+id/nav_all_categories"
+            android:title="All Categories"
+            android:icon="@drawable/nav_menu_all_categories_icon"/>
+
+    </group>
+
+    <item android:title="Profile">
+        <menu>
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_my_home"
+            android:icon="@drawable/home_icon"
+            android:title="My Home" />
+        <item
+            android:id="@+id/nav_my_orders"
+            android:icon="@drawable/my_orders"
+            android:title="My Orders" />
+        <item
+            android:id="@+id/nav_my_rewards"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="My Rewards" />
+        <item
+            android:id="@+id/nav_my_cart"
+            android:icon="@drawable/main_cart_icon"
+            android:title="My Cart" />
+        <item
+            android:id="@+id/nav_my_wishlist"
+            android:icon="@drawable/my_wishlist"
+            android:title="My Wishlist" />
+
+        <item
+            android:id="@+id/nav_my_account"
+            android:icon="@drawable/profile_placeholder"
+            android:title="My Account" />
+
+        <item
+            android:id="@+id/nav_my_notification"
+            android:icon="@drawable/my_notifications_icon"
+            android:title="My Notifications" />
+    </group>
+
+        </menu>
+    </item>
+
+
+    <item
+        android:id="@+id/nav_sign_out"
+        android:icon="@drawable/logout_icon"
+        android:title="Sign Out" />
+
+</menu>
