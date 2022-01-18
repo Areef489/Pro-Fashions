@@ -21,6 +21,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.areef.asrapro.Fragments.MyCartFragment;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.areef.asrapro.DBqueries;
@@ -287,7 +288,7 @@ public class CartAdapter extends RecyclerView.Adapter {
 
                 originalPrice.setText(productPrice.getText());
                 productOrginalPrice = productPriceText;
-                MyRewardsAdapter myRewardsAdapter = new MyRewardsAdapter(position, DBqueries.rewardModelList, true, coupensRecyclerView, selectedCoupen, productOrginalPrice, coupenTitle, coupenExpiryDate, coupenBody, discountedPrice,cartItemModelList);
+                MyRewardsAdapter myRewardsAdapter = new MyRewardsAdapter(position, DBqueries.rewardModelList, true, coupensRecyclerView, selectedCoupen, productOrginalPrice, coupenTitle, coupenExpiryDate, coupenBody, discountedPrice, cartItemModelList);
                 coupensRecyclerView.setAdapter(myRewardsAdapter);
                 myRewardsAdapter.notifyDataSetChanged();
 
@@ -307,7 +308,7 @@ public class CartAdapter extends RecyclerView.Adapter {
                             cartItemModelList.get(position).setDiscountedPrice(discountedPrice.getText().toString().substring(1, discountedPrice.getText().length()));
                             productPrice.setText(discountedPrice.getText());
                             String offerDiscountedAmt = String.valueOf(Long.valueOf(productPriceText) - Long.valueOf(discountedPrice.getText().toString().substring(1, discountedPrice.getText().length())));
-                            coupensApplied.setText("Coupen applied "+"-\u20B9" + offerDiscountedAmt);
+                            coupensApplied.setText("Coupen applied " + "-\u20B9" + offerDiscountedAmt);
                             notifyItemChanged(cartItemModelList.size() - 1);
                             checkCoupenPriceDialog.dismiss();
                         }
@@ -368,7 +369,7 @@ public class CartAdapter extends RecyclerView.Adapter {
                     coupensApplied.setVisibility(View.VISIBLE);
                     productPrice.setText("\u20B9" + cartItemModelList.get(position).getDiscountedPrice());
                     String offerDiscountedAmt = String.valueOf(Long.valueOf(productPriceText) - Long.valueOf(cartItemModelList.get(position).getDiscountedPrice()));
-                    coupensApplied.setText("Coupen applied "+" -\u20B9" + offerDiscountedAmt);
+                    coupensApplied.setText("Coupen applied " + " -\u20B9" + offerDiscountedAmt);
                 } else {
                     coupensApplied.setVisibility(View.INVISIBLE);
                     coupenRedemptionLayout.setBackgroundColor(itemView.getContext().getResources().getColor(R.color.coupenRed));
@@ -523,7 +524,7 @@ public class CartAdapter extends RecyclerView.Adapter {
                 if (offersAppliedNo > 0) {
                     offersApplied.setVisibility(View.VISIBLE);
                     String offerDiscountedAmt = String.valueOf(Long.valueOf(cuttedPriceText) - Long.valueOf(productPriceText));
-                    offersApplied.setText("Offer applied -"+"\u20B9" + offerDiscountedAmt);
+                    offersApplied.setText("Offer applied -" + "\u20B9" + offerDiscountedAmt);
                 } else {
                     offersApplied.setVisibility(View.INVISIBLE);
                 }
@@ -574,7 +575,7 @@ public class CartAdapter extends RecyclerView.Adapter {
                     }
                     if (!ProductDetailsActivity.running_cart_query) {
                         ProductDetailsActivity.running_cart_query = true;
-                        DBqueries.removeFromCart(position, itemView.getContext(), cartTotalAmount);
+                        DBqueries.removeFromCart(position, itemView.getContext(), cartTotalAmount, MyCartFragment.showCartEmptyLayout, MyCartFragment.shopNowBtn);
                     }
                 }
             });
@@ -621,7 +622,7 @@ public class CartAdapter extends RecyclerView.Adapter {
 
             totalAmount.setText("\u20B9" + totalAmountText);
             cartTotalAmount.setText("\u20B9" + totalAmountText);
-            savedAmount.setText("You saved "+"\u20B9" + savedAmountText + " on this order");
+            savedAmount.setText("You saved " + "\u20B9" + savedAmountText + " on this order");
 
             LinearLayout parent = (LinearLayout) cartTotalAmount.getParent().getParent();
             if (totalItemPriceText == 0) {

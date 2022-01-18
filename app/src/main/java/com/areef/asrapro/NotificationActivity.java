@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -21,6 +22,7 @@ public class NotificationActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     public static NotificationAdapter adapter;
     private boolean runQuery = false;
+    public static Activity notificationActivity;
 
     @SuppressLint("WrongConstant")
     @Override
@@ -35,6 +37,7 @@ public class NotificationActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         recyclerView = findViewById(R.id.recycler_view);
+
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
@@ -69,11 +72,20 @@ public class NotificationActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == android.R.id.home) {
+            notificationActivity = null;
             finish();
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public void onBackPressed() {
+        notificationActivity = null;
+        super.onBackPressed();
+    }
+
+
 
 
 }

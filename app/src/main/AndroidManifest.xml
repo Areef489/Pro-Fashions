@@ -7,7 +7,6 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
 
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -15,42 +14,42 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.areef.asrapro.NotificationActivity"></activity>
-        <activity android:name="com.areef.asrapro.SearchActivity" />
-        <activity android:name="com.areef.asrapro.UpdateUserInfoActivity" />
+        <activity android:name=".NotificationActivity" />
+        <activity android:name=".SearchActivity" />
+        <activity android:name=".UpdateUserInfoActivity" />
         <activity
-            android:name="com.areef.asrapro.OTPverificationActivity"
+            android:name=".OTPverificationActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.areef.asrapro.MyAddressesActivity"
+            android:name=".MyAddressesActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.areef.asrapro.AddAddressActivity"
+            android:name=".AddAddressActivity"
             android:screenOrientation="portrait"
             android:theme="@style/RedProgressbar" />
         <activity
-            android:name="com.areef.asrapro.DeliveryActivity"
+            android:name=".DeliveryActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.areef.asrapro.ViewAllActivity"
+            android:name=".ViewAllActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.areef.asrapro.OrderDetailsActivity"
+            android:name=".OrderDetailsActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.areef.asrapro.ProductDetailsActivity"
+            android:name=".ProductDetailsActivity"
             android:screenOrientation="portrait" />
-        <activity android:name="com.areef.asrapro.CategoryActivity" />
+        <activity android:name=".CategoryActivity" />
         <activity
-            android:name="com.areef.asrapro.MainActivity"
+            android:name=".MainActivity"
             android:label="@string/title_activity_main"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.areef.asrapro.RegisterActivity"
+            android:name=".RegisterActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.areef.asrapro.SplashActivity"
+            android:name=".SplashActivity"
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme">
             <intent-filter>

@@ -66,7 +66,6 @@ public class MainActivity extends AppCompatActivity
     private static final int MY_REWARDS_FRAGMENT = 4;
     private static final int MY_ACCOUNT_FRAGMENT = 5;
 
-
     public static Boolean showCart = false;
     public static Activity mainActivity;
     public static boolean resetMainActivity = false;
@@ -174,12 +173,14 @@ public class MainActivity extends AppCompatActivity
     protected void onStart() {
         super.onStart();
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
+
         if (currentUser == null) {
             navigationView.getMenu().getItem(navigationView.getMenu().size() - 1).setEnabled(false);
         } else {
 
-            if (DBqueries.email == null) {
+            /*DBqueries.checkNotifications(false,);*/
 
+            if (DBqueries.email == null) {
                 FirebaseFirestore.getInstance().collection("USERS").document(currentUser.getUid())
                         .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
@@ -201,7 +202,6 @@ public class MainActivity extends AppCompatActivity
                             String error = task.getException().getMessage();
                             Toast.makeText(MainActivity.this, error, Toast.LENGTH_SHORT).show();
                         }
-
                     }
                 });
             } else {
@@ -214,19 +214,15 @@ public class MainActivity extends AppCompatActivity
                     //addProfileIcon.setVisibility(View.INVISIBLE);
                     Glide.with(MainActivity.this).load(DBqueries.profile).apply(new RequestOptions().placeholder(R.drawable.profile_placeholder)).into(profileView);
                 }
-
             }
             navigationView.getMenu().getItem(navigationView.getMenu().size() - 1).setEnabled(true);
         }
-
         if (resetMainActivity) {
-
             resetMainActivity = false;
             actionBarLogo.setVisibility(View.VISIBLE);
             setFragment(new HomeFragment(), HOME_FRAGMENT);
             navigationView.getMenu().getItem(0).setChecked(true);
         }
-
         invalidateOptionsMenu();
     }
 
@@ -316,8 +312,8 @@ public class MainActivity extends AppCompatActivity
             notifyItem.getActionView().setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent searchIntent = new Intent(MainActivity.this, NotificationActivity.class);
-                    startActivity(searchIntent);
+                    Intent notificationIntent = new Intent(MainActivity.this, NotificationActivity.class);
+                    startActivity(notificationIntent);
 
                 }
             });
@@ -410,6 +406,8 @@ public class MainActivity extends AppCompatActivity
                         gotoFragment("My Account", new MyAccountFragment(), MY_ACCOUNT_FRAGMENT);
 
                     } else if (id == R.id.nav_my_notification) {
+                        Intent notificationIntent = new Intent(MainActivity.this, NotificationActivity.class);
+                        startActivity(notificationIntent);
 
                     } else if (id == R.id.nav_sign_out) {
                         FirebaseAuth.getInstance().signOut();

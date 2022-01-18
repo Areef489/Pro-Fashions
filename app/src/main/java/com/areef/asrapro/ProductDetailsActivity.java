@@ -50,6 +50,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.areef.asrapro.Fragments.MyWishlistFragment.addNowBtn;
+import static com.areef.asrapro.Fragments.MyWishlistFragment.wishlistEmptyLayout;
 import static com.areef.asrapro.MainActivity.showCart;
 import static com.areef.asrapro.RegisterActivity.setSignUpFragment;
 
@@ -447,7 +449,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
                         running_wishlist_query = true;
                         if (ALREADY_ADDED_TO_WISHLIST) {
                             int index = DBqueries.wishList.indexOf(productID);
-                            DBqueries.removeFromWishlist(index, ProductDetailsActivity.this);
+                            DBqueries.removeFromWishlist(index, ProductDetailsActivity.this, wishlistEmptyLayout, addNowBtn);
                             addToWishlistBtn.setSupportImageTintList(ColorStateList.valueOf(Color.parseColor("#9e9e9e")));
 
                         } else {

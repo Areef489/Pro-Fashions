@@ -39,10 +39,8 @@ public class MyWishlistFragment extends Fragment {
     private RecyclerView wishlistRecyclerView;
     private Dialog loadingDialog;
     public static WishlistAdapter wishlistAdapter;
-
-    private ImageView wishlistEmpty;
-    private TextView tvWishlistEmpty, tvAddItemsToWishlist;
-    private Button addNowBtn;
+    public static LinearLayout wishlistEmptyLayout;
+    public static Button addNowBtn;
 
     @SuppressLint("WrongConstant")
     @Override
@@ -61,10 +59,7 @@ public class MyWishlistFragment extends Fragment {
         ///loading dialog
 
         wishlistRecyclerView = view.findViewById(R.id.my_wishlist_recyclerview);
-
-        wishlistEmpty = view.findViewById(R.id.iv_wishlist_empty);
-        tvWishlistEmpty = view.findViewById(R.id.tv_wishlist_empty_msg);
-        tvAddItemsToWishlist = view.findViewById(R.id.tv_add_items_to_wishlist_msg);
+        wishlistEmptyLayout = view.findViewById(R.id.wishlist_empty_layout);
         addNowBtn = view.findViewById(R.id.add_now_btn);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
@@ -76,15 +71,9 @@ public class MyWishlistFragment extends Fragment {
         wishlistAdapter.notifyDataSetChanged();
 
         if (DBqueries.wishList.size() != 0) {
-            wishlistEmpty.setVisibility(View.GONE);
-            tvWishlistEmpty.setVisibility(View.GONE);
-            tvAddItemsToWishlist.setVisibility(View.GONE);
-            addNowBtn.setVisibility(View.GONE);
+            wishlistEmptyLayout.setVisibility(View.GONE);
         } else {
-            wishlistEmpty.setVisibility(View.VISIBLE);
-            tvWishlistEmpty.setVisibility(View.VISIBLE);
-            tvAddItemsToWishlist.setVisibility(View.VISIBLE);
-            addNowBtn.setVisibility(View.VISIBLE);
+            wishlistEmptyLayout.setVisibility(View.VISIBLE);
         }
 
         addNowBtn.setOnClickListener(new View.OnClickListener() {

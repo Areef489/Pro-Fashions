@@ -27,6 +27,7 @@ import com.areef.asrapro.MainActivity;
 import com.areef.asrapro.ModelClasses.CartItemModel;
 import com.areef.asrapro.ModelClasses.RewardModel;
 import com.areef.asrapro.R;
+import com.areef.asrapro.SearchActivity;
 
 import java.util.ArrayList;
 
@@ -47,9 +48,8 @@ public class MyCartFragment extends Fragment {
     public static CartAdapter cartAdapter;
     private TextView totalAmount;
 
-    private ImageView cartEmpty;
-    private TextView tvCartEmpty, tvAddItemsToCart;
-    private Button shopNowBtn;
+    public static LinearLayout showCartEmptyLayout;
+    public static Button shopNowBtn;
 
 
     @SuppressLint("WrongConstant")
@@ -72,43 +72,33 @@ public class MyCartFragment extends Fragment {
         continueBtn = view.findViewById(R.id.cart_continue_btn);
         totalAmount = view.findViewById(R.id.total_cart_amount);
 
-        cartEmpty = view.findViewById(R.id.iv_cart_empty);
-        tvCartEmpty = view.findViewById(R.id.tv_cart_empty_msg);
-        tvAddItemsToCart = view.findViewById(R.id.tv_add_items_to_cart_msg);
+        showCartEmptyLayout = view.findViewById(R.id.show_cart_empty_layout);
         shopNowBtn = view.findViewById(R.id.shop_now_btn);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         cartItemsRecyclerView.setLayoutManager(layoutManager);
 
-
         cartAdapter = new CartAdapter(DBqueries.cartItemModelList, totalAmount, true);
         cartItemsRecyclerView.setAdapter(cartAdapter);
         cartAdapter.notifyDataSetChanged();
 
 
+        if (DBqueries.cartList.size() != 0) {
+            showCartEmptyLayout.setVisibility(View.GONE);
+        } else {
+            showCartEmptyLayout.setVisibility(View.VISIBLE);
+        }
 
-            if (DBqueries.cartList.size() != 0) {
-                cartEmpty.setVisibility(View.GONE);
-                tvCartEmpty.setVisibility(View.GONE);
-                tvAddItemsToCart.setVisibility(View.GONE);
-                shopNowBtn.setVisibility(View.GONE);
-            } else {
-                cartEmpty.setVisibility(View.VISIBLE);
-                tvCartEmpty.setVisibility(View.VISIBLE);
-                tvAddItemsToCart.setVisibility(View.VISIBLE);
-                shopNowBtn.setVisibility(View.VISIBLE);
+
+        shopNowBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), MainActivity.class);
+                startActivity(intent);
+                getActivity().finish();
             }
-
-            shopNowBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(getActivity(), MainActivity.class);
-                    startActivity(intent);
-                    getActivity().finish();
-                }
-            });
-
+        });
 
 
         continueBtn.setOnClickListener(new View.OnClickListener() {
@@ -150,6 +140,7 @@ public class MyCartFragment extends Fragment {
         if (DBqueries.cartItemModelList.size() == 0) {
             DBqueries.cartList.clear();
             DBqueries.loadCartList(getContext(), loadingDialog, true, new TextView(getContext()), totalAmount);
+
         } else {
 
             if (DBqueries.cartItemModelList.get(DBqueries.cartItemModelList.size() - 1).getType() == CartItemModel.TOTAL_AMOUNT) {

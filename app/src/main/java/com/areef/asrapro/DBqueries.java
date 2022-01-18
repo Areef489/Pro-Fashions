@@ -5,7 +5,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -14,10 +16,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.areef.asrapro.AdapterClasses.CartAdapter;
 import com.areef.asrapro.AdapterClasses.CategoryAdapter;
 import com.areef.asrapro.AdapterClasses.HomePageAdapter;
 import com.areef.asrapro.AdapterClasses.MyOrderAdapter;
+import com.areef.asrapro.AdapterClasses.SubCategoryAdapter;
 import com.areef.asrapro.Fragments.HomeFragment;
 import com.areef.asrapro.Fragments.MyCartFragment;
 import com.areef.asrapro.Fragments.MyOrdersFragment;
@@ -32,6 +34,7 @@ import com.areef.asrapro.ModelClasses.MyOrderItemModel;
 import com.areef.asrapro.ModelClasses.NotificationModel;
 import com.areef.asrapro.ModelClasses.RewardModel;
 import com.areef.asrapro.ModelClasses.SliderModel;
+import com.areef.asrapro.ModelClasses.SubCategoryModel;
 import com.areef.asrapro.ModelClasses.WishlistModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -54,6 +57,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.areef.asrapro.Fragments.MyWishlistFragment.addNowBtn;
+
 public class DBqueries {
 
     public static FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
@@ -61,6 +66,7 @@ public class DBqueries {
     public static String email, name, profile;
 
     public static List<CategoryModel> categoryModelList = new ArrayList<>();
+    public static List<SubCategoryModel> subCategoryModelList = new ArrayList<>();
 
     public static List<List<HomePageModel>> lists = new ArrayList<>();
     public static List<String> loadedCategoriesNames = new ArrayList<>();
@@ -110,6 +116,38 @@ public class DBqueries {
                 });
 
     }
+
+    public static void loadSubCategories(final RecyclerView subCategoryRecyclerView, final Context context, String categoryName) {
+
+        subCategoryModelList.clear();
+
+        firebaseFirestore.collection("CATEGORIES").document(categoryName.toUpperCase()).collection("SUB CATEGORIES").orderBy("index").get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
+                                String title = (String) documentSnapshot.get("categoryName");
+
+                                if ((Boolean) documentSnapshot.get("categoryName").equals(title)) {
+                                    Log.d("categoryTitle", title);
+                                    subCategoryModelList.add(new SubCategoryModel(documentSnapshot.get("icon").toString(), documentSnapshot.get("categoryName").toString()));
+                                }
+                            }
+                            SubCategoryAdapter subCategoryAdapter = new SubCategoryAdapter(subCategoryModelList);
+                            subCategoryRecyclerView.setAdapter(subCategoryAdapter);
+                            subCategoryAdapter.notifyDataSetChanged();
+                        } else {
+                            String error = task.getException().getMessage();
+                            Toast.makeText(context, error, Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                });
+
+    }
+
 
     public static void loadFragmentData(final RecyclerView homePageRecyclerView, final Context context, final int index, String categoryName) {
         firebaseFirestore.collection("CATEGORIES").document(categoryName.toUpperCase()).collection("TOP_DEALS").orderBy("index").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -269,7 +307,7 @@ public class DBqueries {
         });
     }
 
-    public static void removeFromWishlist(int index, final Context context) {
+    public static void removeFromWishlist(int index, final Context context, final LinearLayout wishlistEmptyLayout, final Button addNowBtn) {
         String removedProductId = wishList.get(index);
         wishList.remove(index);
         Map<String, Object> updateWishlist = new HashMap<>();
@@ -288,6 +326,11 @@ public class DBqueries {
                         MyWishlistFragment.wishlistAdapter.notifyDataSetChanged();
                     }
                     ProductDetailsActivity.ALREADY_ADDED_TO_WISHLIST = false;
+                    if (wishList.size() == 0) {
+                        wishlistEmptyLayout.setVisibility(View.VISIBLE);
+                        addNowBtn.setVisibility(View.VISIBLE);
+                        wishlistModelList.clear();
+                    }
                     Toast.makeText(context, "Removed Successfully", Toast.LENGTH_SHORT).show();
                 } else {
                     if (ProductDetailsActivity.addToWishlistBtn != null) {
@@ -465,7 +508,7 @@ public class DBqueries {
 
     }
 
-    public static void removeFromCart(final int index, final Context context, final TextView cartTotalAmount) {
+    public static void removeFromCart(final int index, final Context context, final TextView cartTotalAmount, final LinearLayout showCartEmptyLayout, final Button shopNowBtn) {
         String removedProductId = cartList.get(index);
         cartList.remove(index);
         Map<String, Object> updateCartList = new HashMap<>();
@@ -484,6 +527,8 @@ public class DBqueries {
                         MyCartFragment.cartAdapter.notifyDataSetChanged();
                     }
                     if (cartList.size() == 0) {
+                        showCartEmptyLayout.setVisibility(View.VISIBLE);
+                        shopNowBtn.setVisibility(View.VISIBLE);
                         LinearLayout parent = (LinearLayout) cartTotalAmount.getParent().getParent();
                         parent.setVisibility(View.GONE);
                         cartItemModelList.clear();
@@ -672,7 +717,6 @@ public class DBqueries {
                                         unread++;
                                         if (notifyCount != null) {
                                             if (unread > 0) {
-
                                                 notifyCount.setVisibility(View.VISIBLE);
                                                 if (unread < 99) {
                                                     notifyCount.setText(String.valueOf(unread));
@@ -704,6 +748,7 @@ public class DBqueries {
 
     public static void clearData() {
         categoryModelList.clear();
+        subCategoryModelList.clear();
         lists.clear();
         loadedCategoriesNames.clear();
         wishList.clear();

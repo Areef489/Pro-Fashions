@@ -3,24 +3,6 @@
     <!--xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">-->
 
-    <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_home"
-            android:title="Menu"
-            android:icon="@drawable/nav_menu_dashboard_icon"/>
-        <item
-            android:id="@+id/nav_search"
-            android:title="Search"
-            android:icon="@drawable/nav_menu_search_icon"/>
-        <item
-            android:id="@+id/nav_all_categories"
-            android:title="All Categories"
-            android:icon="@drawable/nav_menu_all_categories_icon"/>
-
-    </group>
-
-    <item android:title="Profile">
-        <menu>
 
     <group android:checkableBehavior="single">
         <item
@@ -53,15 +35,11 @@
             android:id="@+id/nav_my_notification"
             android:icon="@drawable/my_notifications_icon"
             android:title="My Notifications" />
+
     </group>
-
-        </menu>
-    </item>
-
-
     <item
         android:id="@+id/nav_sign_out"
         android:icon="@drawable/logout_icon"
         android:title="Sign Out" />
-
 </menu>
+

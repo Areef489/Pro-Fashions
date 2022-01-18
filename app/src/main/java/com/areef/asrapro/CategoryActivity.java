@@ -6,29 +6,39 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
+
 
 import com.areef.asrapro.AdapterClasses.HomePageAdapter;
+import com.areef.asrapro.AdapterClasses.SubCategoryAdapter;
 import com.areef.asrapro.ModelClasses.HomePageModel;
-import com.areef.asrapro.ModelClasses.HorizontalProductScrollModel;
-import com.areef.asrapro.ModelClasses.SliderModel;
-import com.areef.asrapro.ModelClasses.WishlistModel;
+
 
 import java.util.ArrayList;
 import java.util.List;
 
+
 import static com.areef.asrapro.DBqueries.lists;
+
 import static com.areef.asrapro.DBqueries.loadFragmentData;
+import static com.areef.asrapro.DBqueries.loadSubCategories;
 import static com.areef.asrapro.DBqueries.loadedCategoriesNames;
+import static com.areef.asrapro.DBqueries.subCategoryModelList;
+import static com.paytm.pgsdk.easypay.manager.PaytmAssist.getContext;
 
 public class CategoryActivity extends AppCompatActivity {
 
     private RecyclerView categoryRecyclerView;
+    private RecyclerView subCategoryRecyclerView;
+    private SubCategoryAdapter subCategoryAdapter;
     private List<HomePageModel> homePageModelFakeList = new ArrayList<>();
-    private  HomePageAdapter adapter;
+    private HomePageAdapter adapter;
+
 
     @SuppressLint("WrongConstant")
     @Override
@@ -43,53 +53,39 @@ public class CategoryActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
-
-        ///////////// home page fake list
-        List<SliderModel> sliderModelFakeList = new ArrayList<>();
-        sliderModelFakeList.add(new SliderModel("null","#ffffff"));
-        sliderModelFakeList.add(new SliderModel("null","#ffffff"));
-        sliderModelFakeList.add(new SliderModel("null","#ffffff"));
-        sliderModelFakeList.add(new SliderModel("null","#ffffff"));
-        sliderModelFakeList.add(new SliderModel("null","#ffffff"));
-
-        List<HorizontalProductScrollModel> horizontalProductScrollModelFakeList = new ArrayList<>();
-        horizontalProductScrollModelFakeList.add(new HorizontalProductScrollModel("","","","",""));
-        horizontalProductScrollModelFakeList.add(new HorizontalProductScrollModel("","","","",""));
-        horizontalProductScrollModelFakeList.add(new HorizontalProductScrollModel("","","","",""));
-        horizontalProductScrollModelFakeList.add(new HorizontalProductScrollModel("","","","",""));
-        horizontalProductScrollModelFakeList.add(new HorizontalProductScrollModel("","","","",""));
-        horizontalProductScrollModelFakeList.add(new HorizontalProductScrollModel("","","","",""));
-        horizontalProductScrollModelFakeList.add(new HorizontalProductScrollModel("","","","",""));
-
-        homePageModelFakeList.add(new HomePageModel(0,sliderModelFakeList));
-        homePageModelFakeList.add(new HomePageModel(1,"","#ffffff"));
-        homePageModelFakeList.add(new HomePageModel(2,"","#ffffff",horizontalProductScrollModelFakeList,new ArrayList<WishlistModel>()));
-        homePageModelFakeList.add(new HomePageModel(3,"","#ffffff",horizontalProductScrollModelFakeList));
-
-        ///////////// home page fake list
         categoryRecyclerView = findViewById(R.id.category_recyclerview);
+        subCategoryRecyclerView = findViewById(R.id.sub_category_recyclerview);
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        subCategoryRecyclerView.setLayoutManager(layoutManager);
+
         LinearLayoutManager testingLayoutManager = new LinearLayoutManager(this);
         testingLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         categoryRecyclerView.setLayoutManager(testingLayoutManager);
 
+        subCategoryAdapter = new SubCategoryAdapter(subCategoryModelList);
         adapter = new HomePageAdapter(homePageModelFakeList);
 
 
         int listPosition = 0;
-        for(int x =0; x<loadedCategoriesNames.size(); x++){
-            if(loadedCategoriesNames.get(x).equals(title.toUpperCase())){
-                listPosition=x;
+        for (int x = 0; x < loadedCategoriesNames.size(); x++) {
+            if (loadedCategoriesNames.get(x).equals(title.toUpperCase())) {
+                listPosition = x;
             }
         }
-        if(listPosition == 0){
+        if (listPosition == 0) {
             loadedCategoriesNames.add(title.toUpperCase());
             lists.add(new ArrayList<HomePageModel>());
-            loadFragmentData(categoryRecyclerView, this,loadedCategoriesNames.size() -1, title);
-        }else{
+            loadSubCategories(subCategoryRecyclerView, getContext(), title);
+            loadFragmentData(categoryRecyclerView, this, loadedCategoriesNames.size() - 1, title);
+        } else {
             adapter = new HomePageAdapter(lists.get(listPosition));
 
         }
         categoryRecyclerView.setAdapter(adapter);
+        subCategoryRecyclerView.setAdapter(subCategoryAdapter);
+        subCategoryAdapter.notifyDataSetChanged();
         adapter.notifyDataSetChanged();
     }
 

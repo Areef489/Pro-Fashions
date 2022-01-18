@@ -74,7 +74,7 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:orientation="vertical"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -86,7 +86,7 @@
             android:layout_height="150dp"
             android:layout_gravity="center"
             android:src="@drawable/empty_cart"
-            android:visibility="gone" />
+            android:visibility="visible" />
 
         <TextView
             android:id="@+id/tv_cart_empty_msg"
@@ -98,7 +98,7 @@
             android:textColor="#000000"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:visibility="gone" />
+            android:visibility="visible" />
 
         <TextView
             android:id="@+id/tv_add_items_to_cart_msg"
@@ -107,7 +107,7 @@
             android:layout_gravity="center"
             android:text="Add items to it now."
             android:textAlignment="center"
-            android:visibility="gone" />
+            android:visibility="visible" />
 
         <Button
             android:id="@+id/shop_now_btn"
@@ -122,7 +122,7 @@
             android:textAllCaps="false"
             android:textColor="@color/colorAccent"
             android:translationZ="8dp"
-            android:visibility="gone" />
+            android:visibility="visible" />
 
     </LinearLayout>
 

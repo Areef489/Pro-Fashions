@@ -14,6 +14,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.areef.asrapro.Fragments.MyWishlistFragment;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.areef.asrapro.DBqueries;
@@ -172,7 +173,7 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
                 public void onClick(View v) {
                     if (!ProductDetailsActivity.running_wishlist_query) {
                         ProductDetailsActivity.running_wishlist_query = true;
-                        DBqueries.removeFromWishlist(index, itemView.getContext());
+                        DBqueries.removeFromWishlist(index, itemView.getContext(), MyWishlistFragment.wishlistEmptyLayout, MyWishlistFragment.addNowBtn);
                     }
                 }
             });
