@@ -379,8 +379,7 @@ public class SignUpFragment extends Fragment {
         if (disableCloseBtn) {
             disableCloseBtn = false;
         }else {
-            Intent mainIntent = new Intent(getActivity(), MainActivity.class);
-            startActivity(mainIntent);
+            startActivity(new Intent(getActivity(), MainActivity.class));
         }
         getActivity().finish();
 

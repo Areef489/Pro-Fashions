@@ -88,6 +88,7 @@ public class MainActivity extends AppCompatActivity
     private ImageView addProfileIcon;
 
     public static DrawerLayout drawer;
+    static final float END_SCALE = 0.7f;
 
 
     @Override
@@ -107,6 +108,7 @@ public class MainActivity extends AppCompatActivity
         //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         drawer = findViewById(R.id.drawer_layout);
         drawer.setScrimColor(getResources().getColor(R.color.colorPrimary));
+        animateNavigationDrawer();
 
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -167,7 +169,6 @@ public class MainActivity extends AppCompatActivity
             }
         });
     }
-
 
     @Override
     protected void onStart() {
@@ -406,14 +407,12 @@ public class MainActivity extends AppCompatActivity
                         gotoFragment("My Account", new MyAccountFragment(), MY_ACCOUNT_FRAGMENT);
 
                     } else if (id == R.id.nav_my_notification) {
-                        Intent notificationIntent = new Intent(MainActivity.this, NotificationActivity.class);
-                        startActivity(notificationIntent);
+                        startActivity(new Intent(MainActivity.this, NotificationActivity.class));
 
                     } else if (id == R.id.nav_sign_out) {
                         FirebaseAuth.getInstance().signOut();
                         DBqueries.clearData();
-                        Intent registerIntent = new Intent(MainActivity.this, RegisterActivity.class);
-                        startActivity(registerIntent);
+                        startActivity(new Intent(MainActivity.this, RegisterActivity.class));
                         finish();
                     }
                     drawer.removeDrawerListener(this);
@@ -424,6 +423,32 @@ public class MainActivity extends AppCompatActivity
             signInDialog.show();
             return false;
         }
+    }
+
+    private void animateNavigationDrawer() {
+
+        //Add any color or remove it to use the default one!
+        //To make it transparent use Color.Transparent in side setScrimColor();
+        //drawerLayout.setScrimColor(Color.TRANSPARENT);
+        drawer.setScrimColor(getResources().getColor(R.color.colorPrimary));
+        drawer.addDrawerListener(new DrawerLayout.SimpleDrawerListener() {
+            @Override
+            public void onDrawerSlide(View drawerView, float slideOffset) {
+
+                // Scale the View based on current slide offset
+                final float diffScaledOffset = slideOffset * (1 - END_SCALE);
+                final float offsetScale = 1 - diffScaledOffset;
+                frameLayout.setScaleX(offsetScale);
+                frameLayout.setScaleY(offsetScale);
+
+                // Translate the View, accounting for the scaled width
+                final float xOffset = drawerView.getWidth() * slideOffset;
+                final float xOffsetDiff = frameLayout.getWidth() * diffScaledOffset / 2;
+                final float xTranslation = xOffset - xOffsetDiff;
+                frameLayout.setTranslationX(xTranslation);
+            }
+        });
+
     }
 
     private void setFragment(Fragment fragment, int fragmentNo) {

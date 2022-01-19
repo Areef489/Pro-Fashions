@@ -68,6 +68,7 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+
         swipeRefreshLayout = view.findViewById(R.id.refresh_layout);
         noInternetConnectionLayout = view.findViewById(R.id.no_internet_connection_layout);
         categoryRecyclerView = view.findViewById(R.id.category_recyclerview);

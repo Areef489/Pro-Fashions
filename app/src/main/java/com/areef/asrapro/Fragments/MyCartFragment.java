@@ -94,8 +94,7 @@ public class MyCartFragment extends Fragment {
         shopNowBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), MainActivity.class);
-                startActivity(intent);
+                startActivity(new Intent(getActivity(), MainActivity.class));
                 getActivity().finish();
             }
         });
